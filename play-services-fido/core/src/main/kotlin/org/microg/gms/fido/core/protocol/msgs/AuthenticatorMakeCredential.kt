@@ -44,7 +44,7 @@ class AuthenticatorMakeCredentialRequest(
     set(0x04, pubKeyCredParams.encodeAsCbor { it.encodeAsCbor() })
     if (excludeList.isNotEmpty()) set(0x05, excludeList.encodeAsCbor { it.encodeAsCbor() })
     if (extensions.isNotEmpty()) set(0x06, extensions.encodeAsCbor { it })
-    if (options != null) set(0x07, options.encodeAsCbor())
+    if (options != null) { val opts = options.encodeAsCbor(); if (opts.size() != 0) set(0x07, opts) }
     if (pinUvAuthParam != null) set(0x08, pinUvAuthParam.encodeAsCbor())
     if (pinUvAuthProtocol != null) set(0x09, pinUvAuthProtocol.encodeAsCbor())
     if (enterpriseAttestation != null) set(0x0A, enterpriseAttestation.encodeAsCbor())
