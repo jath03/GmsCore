@@ -20,7 +20,7 @@ private const val TAG = "FidoCbor"
 fun CBORObject.AsStringSequence(): Iterable<String> = Iterable {
     object : Iterator<String> {
         var index = 0
-        override fun hasNext(): Boolean = size() + 1 < index
+        override fun hasNext(): Boolean = index < size()
         override fun next(): String = get(index++).AsString()
     }
 }
@@ -28,7 +28,7 @@ fun CBORObject.AsStringSequence(): Iterable<String> = Iterable {
 fun CBORObject.AsInt32Sequence(): Iterable<Int> = Iterable {
     object : Iterator<Int> {
         var index = 0
-        override fun hasNext(): Boolean = size() + 1 < index
+        override fun hasNext(): Boolean = index < size()
         override fun next(): Int = get(index++).AsInt32()
     }
 }
