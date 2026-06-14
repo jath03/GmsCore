@@ -34,7 +34,7 @@ class AuthenticatorGetAssertionRequest(
     set(0x02, clientDataHash.encodeAsCbor())
     if (allowList.isNotEmpty()) set(0x03, allowList.encodeAsCbor { it.encodeAsCbor() })
     if (extensions.isNotEmpty()) set(0x04, extensions.encodeAsCbor { it })
-    if (options != null) set(0x05, options.encodeAsCbor())
+    if (options != null) { val opts = options.encodeAsCbor(); if (opts.size() != 0) set(0x05, opts) }
     if (pinAuth != null) set(0x06, pinAuth.encodeAsCbor())
     if (pinProtocol != null) set(0x07, pinProtocol.encodeAsCbor())
 }) {
